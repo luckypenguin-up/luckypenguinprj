@@ -1,0 +1,2 @@
+x='ass'
+print(x);
