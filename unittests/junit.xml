@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="0" failures="2" hostname="192.168.0.101" name="pytest" skipped="0" tests="9" time="0.081" timestamp="2019-12-22T18:30:41.362765"><testcase classname="unittests.test_1" file="unittests/test_1.py" line="6" name="test_div[10-3-3.33333]" time="0.003"><failure message="assert 3.3333333333333335 == 3.33333
+ +  where 3.3333333333333335 = div(10, 3)">number1 = 10, number2 = 3, expection = 3.33333
+
+    @pytest.mark.happy
+    @pytest.mark.parametrize(&quot;number1,number2,expection&quot;,{
+        (10,2,5),
+        (10,3,3.33333),
+        (-10,-2,5),
+        (-10,5,-2),
+        (100000000,1,100000000),
+        (2,20000,0.0001),
+        (0,200,0),
+        (100,0,0),
+        (66.72,11.12,6)
+    }
+    
+    )
+    def test_div(number1,number2,expection):
+&gt;       assert div(number1, number2) == expection
+E       assert 3.3333333333333335 == 3.33333
+E        +  where 3.3333333333333335 = div(10, 3)
+
+unittests/test_1.py:22: AssertionError</failure></testcase><testcase classname="unittests.test_1" file="unittests/test_1.py" line="6" name="test_div[-10--2-5]" time="0.002"></testcase><testcase classname="unittests.test_1" file="unittests/test_1.py" line="6" name="test_div[100-0-0]" time="0.002"><failure message="ZeroDivisionError: division by zero">number1 = 100, number2 = 0, expection = 0
+
+    @pytest.mark.happy
+    @pytest.mark.parametrize(&quot;number1,number2,expection&quot;,{
+        (10,2,5),
+        (10,3,3.33333),
+        (-10,-2,5),
+        (-10,5,-2),
+        (100000000,1,100000000),
+        (2,20000,0.0001),
+        (0,200,0),
+        (100,0,0),
+        (66.72,11.12,6)
+    }
+    
+    )
+    def test_div(number1,number2,expection):
+&gt;       assert div(number1, number2) == expection
+
+unittests/test_1.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+a = 100, b = 0
+
+    def div(a, b):
+&gt;       return a / b
+E       ZeroDivisionError: division by zero
+
+unittests/test_1.py:5: ZeroDivisionError</failure></testcase><testcase classname="unittests.test_1" file="unittests/test_1.py" line="6" name="test_div[2-20000-0.0001]" time="0.002"></testcase><testcase classname="unittests.test_1" file="unittests/test_1.py" line="6" name="test_div[66.72-11.12-6]" time="0.002"></testcase><testcase classname="unittests.test_1" file="unittests/test_1.py" line="6" name="test_div[-10-5--2]" time="0.002"></testcase><testcase classname="unittests.test_1" file="unittests/test_1.py" line="6" name="test_div[100000000-1-100000000]" time="0.002"></testcase><testcase classname="unittests.test_1" file="unittests/test_1.py" line="6" name="test_div[0-200-0]" time="0.002"></testcase><testcase classname="unittests.test_1" file="unittests/test_1.py" line="6" name="test_div[10-2-5]" time="0.002"></testcase></testsuite></testsuites>
