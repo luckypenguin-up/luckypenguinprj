@@ -1,14 +1,23 @@
 from appium.webdriver.common.mobileby import MobileBy
+from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 
+from test_app.page.base_page import BasePage
+from test_app.page.market import Market
+from test_app.page.profile import Profile
 from test_app.page.search import Search
 
-#
-class Main:
-    _driver: WebDriver #存放driver的对象
-    def __init__(self,driver):#接受app的driver方法
-        self._driver = driver
 
+class Main(BasePage):
     def goto_search(self):
-        self._driver.find_element(MobileBy.ID, "tv_search").click()
+        element = (MobileBy.ID, "tv_search")
+        self.find(element).click()
+        return Search(self._driver)
+
+    def goto_profile(self):
+        self.find(By.XPATH, '//*[@text="我的" and contains(@resource-id,"tab_name")]').click()
+        return Profile(self._driver)
+
+    def goto_market(self):
+        self.find(By.XPATH, '//*[@text="行情" and contains(@resource-id,"tab_name")]').click()
         return Search(self._driver)
