@@ -3,14 +3,13 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 
 from test_app.page.base_page import BasePage
-from test_app.page.market import Market
 from test_app.page.profile import Profile
 from test_app.page.search import Search
 
 
 class Main(BasePage):
     def goto_search(self):
-        element = (MobileBy.ID, "tv_search")
+        element = (By.XPATH, "//*[contains(@text, '空箱查询')]")
         self.find(element).click()
         return Search(self._driver)
 
@@ -18,6 +17,3 @@ class Main(BasePage):
         self.find(By.XPATH, '//*[@text="我的" and contains(@resource-id,"tab_name")]').click()
         return Profile(self._driver)
 
-    def goto_market(self):
-        self.find(By.XPATH, '//*[@text="行情" and contains(@resource-id,"tab_name")]').click()
-        return Search(self._driver)

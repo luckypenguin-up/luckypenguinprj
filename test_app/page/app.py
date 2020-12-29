@@ -10,8 +10,8 @@ from selenium.webdriver.remote.webdriver import WebDriver
 #app行为定义
 class App(BasePage):
     #重新定义父类的driver
-    _package = "com.xueqiu.android"
-    _activity = ".view.WelcomeActivityAlias"
+    _package = "com.fcbox.hivebox"
+    _activity = ".ui.activity.WelcomeActivity"
 
     @property
     def start(self):
@@ -21,14 +21,16 @@ class App(BasePage):
             caps["deviceName"] = "123"
             caps["appPackage"] = self._package
             caps["appActivity"] = self._activity
-            #caps["noReset"] = True  # 不重置数据
-            # caps["dontStopAppOnReset"] = True#如果有进程，不杀进程
-            # 设置键盘
+            caps["noReset"] = True  # 不重置数据
+            # caps["dontStopAppOnReset"] = True#调试常用，如果有进程，不杀进程，
+            # 设置键盘中文输入
             # caps["unicodeKeyboard"] = True
             # caps["resetKeyboard"] = True
-            # caps["skipServerInstallation"] = True #提速
+            # caps["skipServerInstallation"] = True #提速，跳过权限设置等
             caps["chromedriverExecutable"] = "/Users/liqian/Downloads/chromedriver-3"
+            #创建连接
             self._driver = webdriver.Remote("http://localhost:4723/wd/hub", caps)
+            #隐式等待，动态的，全局的，找到元素后就不再查找
             self._driver.implicitly_wait(5)
         else:#不为空复用以前的driver
             print(self._driver)
@@ -53,6 +55,7 @@ class App(BasePage):
             if "同意" in source:
                 return True
             return False
+        #显示等待
         WebDriverWait(self._driver,30).until(wait_load)
         return Main(self._driver)
 

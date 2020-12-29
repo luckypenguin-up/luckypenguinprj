@@ -7,22 +7,18 @@ class TestSearch:
     def setup(self):
         self.main = App().start.main()
 
-
-    def test_search(self):
-        #print(self.main)
-        assert self.main.goto_search().search("alibaba").get_price("BABA") > 200
-
-    def test_market_select(self):
-        step1 = self.main.goto_market().market_search("jd").add_select()
-        assert "已添加" in step1.get_msg()
-        step1.un_select()
-        step1.market_search_back()
-
-
-
-    @pytest.mark.parametrize("key,stock_type,price", [
-        ("alibaba", "BABA", 200),
-        ("JD", "JD", 20)
+    @pytest.mark.parametrize("expect_address,key", [
+        ("FC75511249", "75511249")
     ])
-    def test_search_data(self, key, stock_type, price):
-        assert self.main.goto_search().search(key).get_price(stock_type) > price
+    def test_search(self, expect_address, key):
+        assert expect_address in self.main.goto_search().search(key).get_address()
+
+    @pytest.mark.parametrize("key", [
+        ("75511249")
+    ])
+    def test_box_select(self, key):
+        step1 = self.main.goto_search().search(key).add_select()
+        assert "已收藏" in step1.get_msg()
+        step2 = step1.un_select()
+        assert "收藏" in step2.get_msg()
+
